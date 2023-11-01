@@ -1,31 +1,56 @@
-from django.db import models
-
 # Create your models here.
 
+from django.db import models
+from django.core.validators import (
+    MinValueValidator,
+    MaxValueValidator,
+    FileExtensionValidator
+)
+from django.contrib.auth.models import AbstractUser
 
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.conf import settings
+
+class Book(models.Model):
+    title = models.CharField(max_length=500)
+    author = models.CharField(max_length=500)
+    picture = models.ImageField(
+        upload_to="uploads/%Y/%m/%d/", validators=[
+            FileExtensionValidator(allowed_extensions=["png", "jpeg", "jpg"])
+        ]
+    )
+
+    @property
+    def global_rate(self):
+        return self.reviews.all().aggregate(models.Avg("rate"))["rate__avg"] or None
 
 
-class Ticket(models.Model):
-    # state
-    pass
+class CustomUser(AbstractUser):
+    following = models.ManyToManyField(
+        to="self", symmetrical=False, related_name="followers", blank=True
+    )
 
 
 class Review(models.Model):
-    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)])
-    headline = models.CharField(max_length=128)
-    body = models.CharField(max_length=8192, blank=True)
-    time_created = models.DateTimeField(auto_now_add=True)
+    book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="reviews")
+    author_user = models.ForeignKey(to=CustomUser, on_delete=models.PROTECT, related_name="reviews")
+    headline = models.CharField(max_length=150)
+    bodyline = models.CharField(max_length=8000, blank=True)
+    rate = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    creation_date = models.DateTimeField(auto_now_add=True)
 
 
-# class UserFollows(models.Model):
-#     # Your UserFollows model definition goes here
-#
-#     class Meta:
-#         # ensures we don't get multiple UserFollows instances
-#         # for unique user-user_followed pairs
-#         unique_together = ('user', 'followed_user', )
+class Ticket(models.Model):
+    book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="tickets")
+    author_user = models.ForeignKey(to=CustomUser, on_delete=models.PROTECT, related_name="tickets")
+    response = models.OneToOneField(
+        to=Review, on_delete=models.PROTECT, related_name="ticket", null=True, blank=True
+    )
+    answered = models.BooleanField(default=False)
+    headline = models.CharField(max_length=150)
+    bodyline = models.CharField(max_length=3000, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.answered = True if self.response is not None else False
+        super().save(*args, **kwargs)

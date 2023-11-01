@@ -22,6 +22,13 @@ pip install -r requirements.txt
 lancer l'application en local :
 ```bash
 python litrevu/manage.py runserver
+```
+
+Générer le schema des modeles pour l'app `books_reviews` :
+```bash
+sudo apt install graphviz
+
+./manage.py graph_models books_reviews -o books_reviews/Schemas/models_schema.png
 ```  
 
 <br/>
