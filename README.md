@@ -24,11 +24,20 @@ lancer l'application en local :
 python litrevu/manage.py runserver
 ```
 
+<br/>
+
 Générer le schema des modeles pour l'app `books_reviews` :
 ```bash
 sudo apt install graphviz
 
 ./manage.py graph_models books_reviews -o books_reviews/Schemas/models_schema.png
+```
+
+<br/>
+
+Activer la completion par tabulation pour la commande django-admin :
+```bash
+source django_bash_completion
 ```  
 
 <br/>

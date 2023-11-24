@@ -1,0 +1,11 @@
+#main_logo_one {
+    width: 30px;
+}
+
+#main_logo_two {
+    width: 90px;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}

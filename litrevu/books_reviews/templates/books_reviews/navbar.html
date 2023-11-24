@@ -1,0 +1,20 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-sm bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'books_reviews/images/litrevu_logo_icon.png' %}" id="main_logo_one">
+        <img src="{% static 'books_reviews/images/litrevu_logo_text.png' %}" id="main_logo_two">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Flux</a>
+          <a class="nav-link" href="#">Posts</a>
+          <a class="nav-link" href="subscriptions">Subscriptions</a>
+      </div>
+    </div>
+  </div>
+</nav>
