@@ -37,7 +37,7 @@ class Book(models.Model):
     title = models.CharField(max_length=500)
     author = models.CharField(max_length=500)
     picture = models.ImageField(
-        upload_to="books_reviews/static/books_reviews/uploads/%Y/%m/%d/", validators=[
+        upload_to="books_reviews/uploads/%Y/%m/%d/", validators=[
             FileExtensionValidator(allowed_extensions=["png", "jpeg", "jpg"])
         ]
     )

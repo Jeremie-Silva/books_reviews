@@ -53,6 +53,7 @@ def my_posts(request):
     sorted(personal_posts, key=lambda x: x.creation_date, reverse=True)
     data = {
         "username": user.user.username,
-        "my_posts": sorted(personal_posts, key=lambda x: x.creation_date, reverse=True)
+        "my_posts": sorted(personal_posts, key=lambda x: x.creation_date, reverse=True),
+        "rating_loop": range(5)
     }
     return render(request, template_name="books_reviews/my_posts.html", context=data)
