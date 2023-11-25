@@ -9,16 +9,39 @@
     {% include 'books_reviews/navbar.html' %}
 
     <div class="container">
-        <h1>Subscriptions : {{ username }}</h1>
-        <div class="row">
-            {% for follow in follows %}
-                <div class="col">{{ follow }}</div>
-            {% endfor %}
+        <h1 class="mb-5">Subscriptions : {{ username }}</h1>
 
-            {% for follower in followed_by %}
-                <div class="col">{{ follower }}</div>
-            {% endfor %}
-        </div>
+        <h2 class="mb-5 fs-3">My followers</h2>
+        <table class="table mb-5">
+            <thead class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+            </thead>
+            <tbody>
+                {% for index, follower in followed_by %}
+                    <td scope="row" class="fst-italic">{{ index }}</td>
+                    <td scope="row" class="fst-italic">{{ follower }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mb-5 fs-3">My subscriptions</h2>
+        <table class="table mb-5">
+            <thead class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+            </thead>
+            <tbody>
+                {% for index, follow in follows %}
+                    <td scope="row" class="fst-italic">{{ index }}</td>
+                    <td scope="row" class="fst-italic">{{ follow }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-sm bg-body-tertiary">
+<nav class="navbar navbar-expand-sm bg-body-tertiary mb-5">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
         <img src="{% static 'books_reviews/images/litrevu_logo_icon.png' %}" id="main_logo_one">
@@ -9,11 +9,11 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Flux</a>
-          <a class="nav-link" href="#">Posts</a>
-          <a class="nav-link" href="subscriptions">Subscriptions</a>
+        <a class="nav-link" href="/">Flux</a>
+          <a class="nav-link" href="/my_posts">Posts</a>
+          <a class="nav-link" href="/subscriptions">Subscriptions</a>
       </div>
     </div>
   </div>

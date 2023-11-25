@@ -30,8 +30,8 @@ def subscriptions(request):
     user = UserProfile.objects.get(user__username=request.user)
     data = {
         "username": user.user.username,
-        "follows": user.follows.all(),
-        "followed_by": user.followed_by.all()
+        "follows": enumerate(user.follows.all(), start=1),
+        "followed_by": enumerate(user.followed_by.all(), start=1)
     }
     return render(request, template_name="books_reviews/subscriptions.html", context=data)
 
@@ -49,8 +49,10 @@ def review_creation(request):
 @login_required(login_url="login")
 def my_posts(request):
     user = UserProfile.objects.get(user__username=request.user)
+    personal_posts: list = list(user.tickets.all()) + list(user.reviews.all())
+    sorted(personal_posts, key=lambda x: x.creation_date, reverse=True)
     data = {
-        "tickets": user.tickets.all(),
-        "reviews": user.reviews.all()
+        "username": user.user.username,
+        "my_posts": sorted(personal_posts, key=lambda x: x.creation_date, reverse=True)
     }
     return render(request, template_name="books_reviews/my_posts.html", context=data)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from django.contrib.auth.models import User
 from django.core.validators import (
     MinValueValidator,
@@ -45,19 +46,39 @@ class Book(models.Model):
     def global_rate(self):
         return self.reviews.all().aggregate(models.Avg("rate"))["rate__avg"] or None
 
-    @property
+    @admin.display(boolean=True)
     def has_picture(self):
-        if self.picture:
-            return True
-        return False
+        return True if self.picture else False
+
+    @property
+    def count_reviews(self):
+        return len(self.reviews.all())
 
     def __str__(self):
         return self.title
 
 
+class Ticket(models.Model):
+    book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="tickets")
+    author_user = models.ForeignKey(to=UserProfile, on_delete=models.PROTECT, related_name="tickets")
+    headline = models.CharField(max_length=150)
+    bodyline = models.CharField(max_length=3000, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    @admin.display(boolean=True)
+    def answered(self):
+        return True if self.review else False
+
+    def __str__(self):
+        return self.book.title
+
+
 class Review(models.Model):
     book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="reviews")
     author_user = models.ForeignKey(to=UserProfile, on_delete=models.PROTECT, related_name="reviews")
+    ticket = models.OneToOneField(
+        to=Ticket, on_delete=models.PROTECT, related_name="review", null=True, blank=True
+    )
     headline = models.CharField(max_length=150)
     bodyline = models.CharField(max_length=8000, blank=True)
     rate = models.PositiveSmallIntegerField(
@@ -67,22 +88,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.book.title} > {self.author_user} > {self.rate}"
-
-
-class Ticket(models.Model):
-    book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="tickets")
-    author_user = models.ForeignKey(to=UserProfile, on_delete=models.PROTECT, related_name="tickets")
-    response = models.OneToOneField(
-        to=Review, on_delete=models.PROTECT, related_name="ticket", null=True, blank=True
-    )
-    answered = models.BooleanField(default=False)
-    headline = models.CharField(max_length=150)
-    bodyline = models.CharField(max_length=3000, blank=True)
-    creation_date = models.DateTimeField(auto_now_add=True)
-
-    def save(self, *args, **kwargs):
-        self.answered = True if self.response is not None else False
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.book.title

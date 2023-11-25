@@ -9,14 +9,11 @@
     {% include 'books_reviews/navbar.html' %}
 
     <div class="container">
-        <h1>My posts : {{ username }}</h1>
-        <div class="row">
-            {% for ticket in tickets %}
-                <div class="col">{{ ticket }}</div>
-            {% endfor %}
+        <h1 class="mb-5">My posts : {{ username }}</h1>
 
-            {% for review in reviews %}
-                <div class="col">{{ review }}</div>
+        <div class="row">
+            {% for post in my_posts %}
+                <div>{{ post }}</div>
             {% endfor %}
         </div>
     </div>
