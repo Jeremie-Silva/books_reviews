@@ -2,50 +2,18 @@
 
 <html lang="en" data-bs-theme="dark">
 <head>
-    {% include 'books_reviews/head.html' %}
+    {% include 'books_reviews/_head.html' %}
     <title>My posts</title>
 </head>
 <body>
-    {% include 'books_reviews/navbar.html' %}
+    {% include 'books_reviews/_navbar.html' %}
 
     <div class="container">
         <h1 class="mb-5 text-center">My posts : {{ username }}</h1>
-
         <div class="row">
             {% for post in my_posts %}
-                <div class="card mb-5">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <img src="{{  post.book.picture.url  }}" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <div class="row">
-                                    <p class="col-md-10 card-title fs-5 fw-bold fst-italic">{{  post.book.title  }}</p>
-                                    {% if post.rate %}
-                                        <p class="col-md-2">
-                                            {% for number in rating_loop %}
-                                                {% if post.rate > number %}
-                                                <span class="fa fa-star text-warning"></span>
-                                                {% else %}
-                                                <span class="fa fa-star"></span>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </p>
-                                    {% else %}
-                                        <p class="col-md-2 fw-lighter">waiting a review 👋</p>
-                                    {% endif %}
-                                </div>
-                                <hr>
-                                <p class="card-text">{{  post.headline  }}</p>
-                                <p class="card-text">{{  post.bodyline  }}</p>
-                                <p class="card-text"><small class="text-body-secondary">{{  post.creation_date  }}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include 'books_reviews/_post.html' %}
             {% endfor %}
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

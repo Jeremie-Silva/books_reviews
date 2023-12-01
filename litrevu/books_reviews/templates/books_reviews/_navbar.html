@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-sm bg-body-tertiary mb-5">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img src="{% static 'books_reviews/images/litrevu_logo_icon.png' %}" id="main_logo_one">
         <img src="{% static 'books_reviews/images/litrevu_logo_text.png' %}" id="main_logo_two">
     </a>
@@ -11,9 +11,9 @@
     </button>
     <div class="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/">Flux</a>
-          <a class="nav-link" href="/my_posts">Posts</a>
-          <a class="nav-link" href="/subscriptions">Subscriptions</a>
+        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Flux</a>
+          <a class="nav-link {% if request.path == '/my_posts/' %}active{% endif %}" href="/my_posts">Posts</a>
+          <a class="nav-link {% if request.path == '/subscriptions/' %}active{% endif %}" href="/subscriptions">Subscriptions</a>
       </div>
     </div>
   </div>

@@ -1,16 +1,16 @@
-Faire les requetes pour la vue Flux
-template de la vue Flux
+Trier flux dans le bon ordre
+programmer le bouton des posts
 
 creer le formulaire de connexion
-Créer les vues avec les bonnes queries
+formulaire création de ticket
+formulaire création de review
+bouton formaulaire de désabonnement
 modification des ses tickets/reviews
+déconnexion
 
 renommer images à la volée
-
 admin : global rate au bon format
 admin : formattage des booléens pour le False
 admin : rate sous une autre forme
 admin : agrandir le champ bodyline
 régénerer migration
-
-JS : ajouter la classe active dans la navigation

@@ -2,11 +2,11 @@
 
 <html lang="en" data-bs-theme="dark">
 <head>
-    {% include 'books_reviews/head.html' %}
+    {% include 'books_reviews/_head.html' %}
     <title>Subscriptions</title>
 </head>
 <body>
-    {% include 'books_reviews/navbar.html' %}
+    {% include 'books_reviews/_navbar.html' %}
 
     <div class="container">
         <h1 class="mb-5 text-center">Subscriptions : {{ username }}</h1>
@@ -19,8 +19,10 @@
             </thead>
             <tbody>
                 {% for index, follower in followed_by %}
-                    <td scope="row" class="fst-italic">{{ index }}</td>
+                <tr>
+                    <th scope="row" class="fst-italic">{{ index }}</th>
                     <td scope="row" class="fst-italic">{{ follower }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -33,8 +35,10 @@
             </thead>
             <tbody>
                 {% for index, follow in follows %}
-                    <td scope="row" class="fst-italic">{{ index }}</td>
+                <tr>
+                    <th scope="row" class="fst-italic">{{ index }}</th>
                     <td scope="row" class="fst-italic">{{ follow }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
