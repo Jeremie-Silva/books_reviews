@@ -1,4 +1,3 @@
-Trier flux dans le bon ordre
 programmer le bouton des posts
 
 creer le formulaire de connexion
@@ -14,3 +13,6 @@ admin : formattage des booléens pour le False
 admin : rate sous une autre forme
 admin : agrandir le champ bodyline
 régénerer migration
+
+accessibilité
+PEP8
