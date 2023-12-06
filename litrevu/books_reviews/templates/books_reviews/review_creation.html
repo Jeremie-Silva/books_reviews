@@ -9,8 +9,35 @@
     {% include 'books_reviews/_navbar.html' %}
 
     <div class="container">
-    <h1>Review creation</h1>
+        <h1 class="mb-5 text-center">Review creation ✍️</h1>
         <div class="row">
+
+            {% if succes %}
+                <div class="alert alert-success alert-dismissible fade show container-sm col-8" role="alert">
+                    ✅ Your review is correctly saved
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-floating">
+                    {{ form.book }}
+                    <label for="book_select">Book</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.headline }}
+                    <label for="headline_textarea">Head line</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.bodyline }}
+                    <label for="bodyline_textarea">Body line</label>
+                </div>
+                <label for="rate_input">Rate</label>
+                {{ form.rate }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
         </div>
     </div>
 

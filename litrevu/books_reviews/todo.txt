@@ -1,3 +1,7 @@
+rate: 0 ?
+barrre de scroll vertical degueulasse
+
+
 programmer le bouton des posts
 
 creer le formulaire de connexion

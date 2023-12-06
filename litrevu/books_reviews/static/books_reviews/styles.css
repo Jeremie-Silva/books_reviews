@@ -5,3 +5,7 @@
 #main_logo_two {
     width: 90px;
 }
+
+label {
+    color: rgba(var(--bs-body-color-rgb),.65);
+}

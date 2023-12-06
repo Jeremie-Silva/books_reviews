@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
+from .forms import ReviewForm
 
 
 def login(request):
@@ -61,3 +62,23 @@ def my_posts(request):
         "rating_loop": range(5)
     }
     return render(request, template_name="books_reviews/my_posts.html", context=data)
+
+
+@login_required(login_url="login")
+def review_creation(request):
+    if request.method == "POST":
+        form: ReviewForm = ReviewForm(request.POST)
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.author_user = UserProfile.objects.get(user=request.user)
+            new_review.save()
+            return render(
+                request,
+                template_name="books_reviews/review_creation.html",
+                context={"form": ReviewForm(), "succes": True}
+            )
+    return render(
+        request,
+        template_name="books_reviews/review_creation.html",
+        context={"form": ReviewForm()}
+    )
