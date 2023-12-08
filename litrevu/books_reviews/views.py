@@ -1,22 +1,25 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile
-from .forms import ReviewForm
+from .forms import ReviewForm, BookForm, TicketForm, UserProfile
 
 
-def login(request):
+def user_login(request):
     if request.user.is_authenticated:
         return redirect(to="flux")
+    if request.method == "POST":
+        if request.POST.get("form_submit") == "authentication":
+            user = authenticate(request, username=request.POST.get("username"), password=request.POST.get("password"))
+            if user is not None:
+                login(request, user)
+                return redirect(to="flux")
+        if request.POST.get("form_submit") == "form_userprofile":
+            pass
+            # to implement
     return render(request, template_name="books_reviews/login.html")
 
 
-def inscription(request):
-    if request.user.is_authenticated:
-        return redirect(to="flux")
-    return render(request, template_name="books_reviews/inscription.html")
-
-
-@login_required(login_url="login")
+@login_required(login_url="user_login")
 def flux(request):
     user = UserProfile.objects.get(user__username=request.user)
     flux: list = []
@@ -31,7 +34,7 @@ def flux(request):
     return render(request, template_name="books_reviews/flux.html", context=data)
 
 
-@login_required(login_url="login")
+@login_required(login_url="user_login")
 def subscriptions(request):
     user = UserProfile.objects.get(user__username=request.user)
     data = {
@@ -42,17 +45,7 @@ def subscriptions(request):
     return render(request, template_name="books_reviews/subscriptions.html", context=data)
 
 
-@login_required(login_url="login")
-def ticket_creation(request):
-    return render(request, template_name="books_reviews/ticket_creation.html")
-
-
-@login_required(login_url="login")
-def review_creation(request):
-    return render(request, template_name="books_reviews/review_creation.html")
-
-
-@login_required(login_url="login")
+@login_required(login_url="user_login")
 def my_posts(request):
     user = UserProfile.objects.get(user__username=request.user)
     personal_posts: list = list(user.tickets.all()) + list(user.reviews.all())
@@ -64,21 +57,30 @@ def my_posts(request):
     return render(request, template_name="books_reviews/my_posts.html", context=data)
 
 
-@login_required(login_url="login")
-def review_creation(request):
+@login_required(login_url="user_login")
+def creation(request):
+    data: dict = {"form_book": BookForm(), "form_review": ReviewForm(), "form_ticket": TicketForm()}
     if request.method == "POST":
-        form: ReviewForm = ReviewForm(request.POST)
-        if form.is_valid():
-            new_review = form.save(commit=False)
-            new_review.author_user = UserProfile.objects.get(user=request.user)
-            new_review.save()
-            return render(
-                request,
-                template_name="books_reviews/review_creation.html",
-                context={"form": ReviewForm(), "succes": True}
-            )
-    return render(
-        request,
-        template_name="books_reviews/review_creation.html",
-        context={"form": ReviewForm()}
-    )
+        if request.POST.get("form_submit") == "form_book":
+            form: BookForm = BookForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                data["success"] = True
+                return render(request, template_name="books_reviews/creation.html", context=data)
+        if request.POST.get("form_submit") == "form_review":
+            form: ReviewForm = ReviewForm(request.POST)
+            if form.is_valid():
+                new_review = form.save(commit=False)
+                new_review.author_user = UserProfile.objects.get(user=request.user)
+                new_review.save()
+                data["success"] = True
+                return render(request, template_name="books_reviews/creation.html", context=data)
+        if request.POST.get("form_submit") == "form_ticket":
+            form: TicketForm = TicketForm(request.POST)
+            if form.is_valid():
+                new_review = form.save(commit=False)
+                new_review.author_user = UserProfile.objects.get(user=request.user)
+                new_review.save()
+                data["success"] = True
+                return render(request, template_name="books_reviews/creation.html", context=data)
+    return render(request, template_name="books_reviews/creation.html", context=data)

@@ -1,0 +1,21 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="form-floating">
+        {{ form_review.book }}
+        <label for="book_select">Book</label>
+    </div>
+    <div class="form-floating">
+        {{ form_review.headline }}
+        <label for="headline_textarea">Head line</label>
+    </div>
+    <div class="form-floating">
+        {{ form_review.bodyline }}
+        <label for="bodyline_textarea">Body line</label>
+    </div>
+    <div>
+        <label for="rate_radio">Rate : </label>
+        {{ form_review.rate }}
+    </div>
+    <button type="submit" name="form_submit" value="form_review" class="btn btn-Success mt-3">Submit</button>
+
+</form>

@@ -1,0 +1,64 @@
+{% load static %}
+
+<html lang="en" data-bs-theme="dark">
+<head>
+  {% include 'books_reviews/_head.html' %}
+  <title>Review creation</title>
+</head>
+<body>
+  {% include 'books_reviews/_navbar.html' %}
+
+  <div class="container">
+    <h1 class="mb-5 text-center">Creation ✍️</h1>
+      <div class="row">
+
+        {% if success %}
+          <div class="alert alert-success alert-dismissible fade show container-sm col-8" role="alert">
+            ✅ correctly saved
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+
+        <div class="accordion accordion-flush " id="accordionFlushExample">
+          <div class="accordion-item">
+          <p class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              ➕ add book
+            </button>
+          </p>
+          <div id="flush-collapseOne" class="accordion-collapse p-5 collapse" data-bs-parent="#accordionFlushExample">
+            <h2 class="mb-3 text-center">Book</h2>
+              {% include 'books_reviews/_form_book.html' %}
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <p class="accordion-header">
+            <button class="accordion-button {% if not request.GET.action == 'create_review' %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              ➕ add review
+            </button>
+          </p>
+          <div id="flush-collapseTwo" class="accordion-collapse p-5 {% if not request.GET.action == 'create_review' %}collapse{% endif %}" data-bs-parent="#accordionFlushExample">
+            <h2 class="mb-3 text-center">Review</h2>
+            {% include 'books_reviews/_form_review.html' %}
+          </div>
+        </div>
+        <div class="accordion-item">
+          <p class="accordion-header">
+            <button class="accordion-button {% if not request.GET.action == 'create_ticket' %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              ➕ request review
+            </button>
+          </p>
+          <div id="flush-collapseThree" class="accordion-collapse p-5 {% if not request.GET.action == 'create_ticket' %}collapse{% endif %}" data-bs-parent="#accordionFlushExample">
+            <h2 class="mb-3 text-center">Ticket</h2>
+            {% include 'books_reviews/_form_ticket.html' %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

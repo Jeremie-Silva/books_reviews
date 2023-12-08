@@ -9,3 +9,12 @@
 label {
     color: rgba(var(--bs-body-color-rgb),.65);
 }
+
+#rate_radio {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+body::-webkit-scrollbar {
+  display:none;
+}

@@ -1,0 +1,17 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-floating">
+        {{ form_book.title }}
+        <label for="title_textarea">Title</label>
+    </div>
+    <div class="form-floating">
+        {{ form_book.author }}
+        <label for="author_textarea">Author</label>
+    </div>
+      <div class="">
+        <label for="picture_input">Picture : </label>
+        {{ form_book.picture }}
+    </div>
+    <button type="submit" name="form_submit" value="form_book" class="btn btn-Success mt-3">Submit</button>
+
+</form>

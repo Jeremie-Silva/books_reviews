@@ -1,15 +1,18 @@
-rate: 0 ?
-barrre de scroll vertical degueulasse
+creer le formulaire de connexion
+déconnexion
 
 
+
+
+pour l'édition : page d'édition
 programmer le bouton des posts
 
-creer le formulaire de connexion
-formulaire création de ticket
-formulaire création de review
-bouton formaulaire de désabonnement
-modification des ses tickets/reviews
-déconnexion
+follow obligatoire ? à la creation d'un utilisateur ?
+
+bouton formulaire de désabonnement
+
+
+
 
 renommer images à la volée
 admin : global rate au bon format
