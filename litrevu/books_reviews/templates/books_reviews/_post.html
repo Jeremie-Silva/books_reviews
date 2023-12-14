@@ -11,17 +11,17 @@
                 <div class="row align-items-center">
                     <p class="col-md-8 card-title fs-5 fw-bold fst-italic">{{  post.book.title  }}</p>
                     {% if post.rate %}
-                    <p class="col-md-4 text-end">
-                        {% for number in rating_loop %}
-                            {% if post.rate > number %}
-                            <span class="fa fa-star text-warning"></span>
-                            {% else %}
-                            <span class="fa fa-star"></span>
-                            {% endif %}
-                        {% endfor %}
-                    </p>
+                        <p class="col-md-4 text-end">
+                            {% for number in rating_loop %}
+                                {% if post.rate > number %}
+                                <span class="fa fa-star text-warning"></span>
+                                {% else %}
+                                <span class="fa fa-star"></span>
+                                {% endif %}
+                            {% endfor %}
+                        </p>
                     {% else %}
-                        <button type="button" class="btn btn-sm btn-outline-light col-md-2 offset-md-2">✒️ Answer it</button>
+                        <a href="/creation?action=create_review&id={{  post.id  }}" class="btn btn-sm btn-outline-light col-md-2 offset-md-2">✒️ Answer it</a>
                     {% endif %}
                 </div>
                 <hr class="mb-4">
@@ -44,8 +44,6 @@
                         <small class="text-body-secondary ms-5">🕙 {{  post.ticket.creation_date  }}</small>
                         {% if post.ticket.answered %}
                             <small class="text-body-secondary ms-5">✅ answered</small>
-                        {% else %}
-<!--                            <small class="text-body-secondary ms-5">👋 waiting a review</small>-->
                         {% endif %}
                     </p>
                 {% endif %}

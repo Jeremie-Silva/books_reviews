@@ -1,14 +1,21 @@
-from django.forms import ModelForm, Textarea, Select, RadioSelect, FileInput
+from django.forms import ModelForm, Textarea, Select, RadioSelect, FileInput, PasswordInput, TextInput
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Review, Book, Ticket, UserProfile
 
 
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = ["book", "headline", "bodyline", "rate"]
+        fields = ["book", "ticket", "headline", "bodyline", "rate"]
         widgets = {
             "book": Select(attrs={
                 "id": "book_select",
+                "class": "form-select mb-3",
+                "placeholder": "",
+            }),
+            "ticket": Select(attrs={
+                "id": "ticket_select",
                 "class": "form-select mb-3",
                 "placeholder": "",
             }),
@@ -83,7 +90,22 @@ class TicketForm(ModelForm):
         }
 
 
-class UserProfile(ModelForm):
+class CustomUserCreationForm(UserCreationForm):
     class Meta:
-        model = UserProfile
-        fields = []
+        model = User
+        fields = ["username", "password1", "password2"]
+        widgets = {
+            "username": TextInput(attrs={
+                "id": "user_username",
+                "class": "form-control mb-3",
+                "placeholder": "",
+            }),
+            "password1": PasswordInput(attrs={
+                "id": "user_password1",
+                "placeholder": "",
+            }),
+            "password2": PasswordInput(attrs={
+                "id": "user_password2",
+                "placeholder": "",
+            }),
+        }

@@ -11,13 +11,7 @@
   <div class="container">
     <h1 class="mb-5 text-center">Creation ✍️</h1>
       <div class="row">
-
-        {% if success %}
-          <div class="alert alert-success alert-dismissible fade show container-sm col-8" role="alert">
-            ✅ correctly saved
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endif %}
+        {% include 'books_reviews/_message.html' %}
 
         <div class="accordion accordion-flush " id="accordionFlushExample">
           <div class="accordion-item">

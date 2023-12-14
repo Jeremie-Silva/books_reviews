@@ -22,7 +22,9 @@ pip install -r requirements.txt
 lancer l'application en local :
 ```bash
 python litrevu/manage.py runserver
+google-chrome http://127.0.0.1:8000/
 ```
+(remplacer google-chrome par le nom de votre navigateur)
 
 <br/>
 
@@ -47,3 +49,28 @@ Quitter l'environnement virtuel :
 deactivate
 ```  
 
+<br/>
+<br/>
+
+### Docker
+```bash
+git clone git@github.com:Jeremie-Silva/books_reviews.git
+cd books_reviews
+```
+
+
+Build une image :
+```bash
+docker build -t books_reviews .
+```
+
+Lancer le container :
+```bash
+docker container run -v $(pwd):/app -it -p 8000:8000 books_reviews
+```
+
+Accéder au Front-end (depuis un autre terminal) :
+```bash
+google-chrome http://127.0.0.1:8000/
+```
+(remplacer google-chrome par le nom de votre navigateur)

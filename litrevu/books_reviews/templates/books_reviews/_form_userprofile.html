@@ -1,0 +1,16 @@
+<form method="post">
+  {% csrf_token %}
+  <div class="form-floating ms-5 me-5">
+    {{ form_user.username }}
+    <label for="user_username">Username</label>
+  </div>
+  <div class="form-floating m-5">
+    {{ form_user.password1 }}
+    <label for="user_password1">Password</label>
+  </div>
+  <div class="form-floating m-5">
+    {{ form_user.password2 }}
+    <label for="user_password2">Password</label>
+  </div>
+  <button type="submit" name="form_submit" value="form_userprofile" class="btn btn-Success mt-3">Create</button>
+</form>

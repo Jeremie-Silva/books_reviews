@@ -67,7 +67,7 @@ class Ticket(models.Model):
 
     @admin.display(boolean=True)
     def answered(self):
-        return bool(True if self.review else False)
+        return bool(getattr(self, "review", False))
 
     def __str__(self):
         return self.book.title

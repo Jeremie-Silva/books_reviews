@@ -1,0 +1,12 @@
+<form method="post">
+  {% csrf_token %}
+  <div class="form-floating ms-5 me-5">
+    <input id="username_textarea" type="text" name="username" class="form-select mb-3" required>
+    <label for="username_textarea">Username</label>
+  </div>
+  <div class="form-floating m-5">
+    <input id="password_textarea" type="password" name="password" class="form-select mb-3" required>
+    <label for="password_textarea">Password</label>
+  </div>
+  <button type="submit" name="form_submit" value="authentication" class="btn btn-Success mt-3">Login</button>
+</form>
