@@ -1,5 +1,6 @@
 from django.contrib.admin import register, ModelAdmin
 from .models import UserProfile, Book, Review, Ticket
+from django.utils.html import format_html
 
 
 @register(UserProfile)
@@ -10,14 +11,23 @@ class UserProfileAdmin(ModelAdmin):
 
 @register(Book)
 class BookAdmin(ModelAdmin):
-    list_display = ("title", "count_reviews", "author", "global_rate", "has_picture")
+    list_display = ("title", "author", "count_reviews", "global_rate", "has_picture")
     fields = ("title", "author", "picture")
+
+    def global_rate(self, obj):
+        try:
+            return format_html(f'<span style="color: orange;">{"★" * obj.global_rate}</span>')
+        except TypeError:
+            return format_html("<span>-</span>")
 
 
 @register(Review)
 class ReviewAdmin(ModelAdmin):
-    list_display = ("book", "rate", "author_user", "creation_date", "ticket")
+    list_display = ("book", "rating", "author_user", "creation_date", "ticket")
     fields = ("book", "author_user", "ticket", "headline", "bodyline", "rate")
+
+    def rating(self, obj):
+        return format_html(f'<span style="color: orange;">{'★' * obj.rate}</span>')
 
 
 @register(Ticket)

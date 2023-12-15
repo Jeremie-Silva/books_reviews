@@ -37,6 +37,16 @@ sudo apt install graphviz
 
 <br/>
 
+Générer le rapport de codingstyle avec flake8 pour l'app `books_reviews` :
+```bash
+flake8 --format=html --max-line-length=99 --htmldir=litrevu/flake8_report litrevu
+google-chrome litrevu/flake8_report/index.html 
+```
+(remplacer google-chrome par le nom de votre navigateur)
+
+
+<br/>
+
 Activer la completion par tabulation pour la commande django-admin :
 ```bash
 source django_bash_completion

@@ -3,3 +3,5 @@ django-extensions
 pyparsing
 pydot
 Pillow
+flake8
+flake8-html

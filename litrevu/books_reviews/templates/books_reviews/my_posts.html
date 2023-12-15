@@ -13,11 +13,11 @@
         <h1 class="mb-5 text-center">My posts : {{ username }}</h1>
         <div class="row">
             {% for post in my_posts %}
-                <form action="{% url 'deletion' item=post.rate|yesno:'review,ticket' id=post.id %}" method="post" class="pe-3 col-2 mb-1">
+                <form action="{% url 'deletion' item=post.rate|yesno:'review,ticket' id=post.id %}" method="post" class="col-2 mb-1">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-dark">❌ Delete</button>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary w-100">❌ Delete</button>
                 </form>
-                <a href="{% url 'edition' item=post.rate|yesno:'review,ticket' id=post.id %}" type="button" class="btn btn-sm btn-dark col-2 mb-1">✏️ Edit</a>
+                <a href="{% url 'edition' item=post.rate|yesno:'review,ticket' id=post.id %}" type="button" class="btn btn-sm btn-outline-secondary col-2 mb-1">✏️ Edit</a>
                 {% include 'books_reviews/_post.html' %}
             {% endfor %}
         </div>

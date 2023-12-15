@@ -71,7 +71,10 @@ def subscriptions(request, user_id=None):
 @login_required(login_url="user_login")
 def my_posts(request):
     user: UserProfile = UserProfile.objects.get(user__username=request.user)
-    personal_posts: list = list(user.tickets.all()) + list(user.reviews.all())
+    personal_posts: list = list(user.tickets.filter(review__isnull=True)) + list(user.reviews.all())
+    personal_posts += list(Review.objects.filter(
+        ticket__isnull=False, ticket__author_user=user
+    ).exclude(author_user=user))
     data = {
         "username": user.user.username,
         "my_posts": sorted(personal_posts, key=lambda x: x.creation_date, reverse=True),
@@ -82,7 +85,9 @@ def my_posts(request):
 
 @login_required(login_url="user_login")
 def creation(request):
-    data: dict = {"form_book": BookForm(), "form_review": ReviewForm(), "form_ticket": TicketForm()}
+    review_form = ReviewForm()
+    review_form.fields["ticket"].queryset = Ticket.objects.exclude(review__isnull=False)
+    data: dict = {"form_book": BookForm(), "form_review": review_form, "form_ticket": TicketForm()}
     if request.method == "POST":
         if request.POST.get("form_submit") == "form_book":
             form: BookForm = BookForm(request.POST, request.FILES)
@@ -140,16 +145,22 @@ def edition(request, item, id):
 @login_required(login_url="user_login")
 def deletion(request, item, id):
     if request.method == "POST":
-        if item == "ticket" and request.user == Ticket.objects.get(pk=id).author_user.user:
-            try:
-                Ticket.objects.get(pk=id).delete()
-                messages.success(request=request, message="Your changes were saved successfully.")
-            except:
+        if item == "ticket":
+            if request.user == Ticket.objects.get(pk=id).author_user.user:
+                try:
+                    Ticket.objects.get(pk=id).delete()
+                    messages.success(request=request, message="Your changes were saved successfully.")
+                except:
+                    messages.error(request=request, message="This item is protected.")
+            else:
                 messages.error(request=request, message="This item is protected.")
-        if item == "review" and request.user == Review.objects.get(pk=id).author_user.user:
-            try:
-                Review.objects.get(pk=id).delete()
-                messages.success(request=request, message="Your changes were saved successfully.")
-            except:
+        if item == "review":
+            if request.user == Review.objects.get(pk=id).author_user.user:
+                try:
+                    Review.objects.get(pk=id).delete()
+                    messages.success(request=request, message="Your changes were saved successfully.")
+                except:
+                    messages.error(request=request, message="This item is protected.")
+            else:
                 messages.error(request=request, message="This item is protected.")
     return redirect("my_posts")

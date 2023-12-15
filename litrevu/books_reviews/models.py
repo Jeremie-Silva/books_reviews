@@ -44,7 +44,8 @@ class Book(models.Model):
 
     @property
     def global_rate(self):
-        return self.reviews.all().aggregate(models.Avg("rate"))["rate__avg"] or None
+        global_rate = self.reviews.all().aggregate(models.Avg("rate"))["rate__avg"] or None
+        return round(global_rate) if global_rate is not None else None
 
     @admin.display(boolean=True)
     def has_picture(self):
@@ -70,7 +71,7 @@ class Ticket(models.Model):
         return bool(getattr(self, "review", False))
 
     def __str__(self):
-        return self.book.title
+        return f"{self.author_user} > {self.book.title} > {self.creation_date}"
 
 
 class Review(models.Model):
