@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% load static %}
 
 <html lang="en" data-bs-theme="dark">
@@ -9,7 +10,7 @@
   {% include 'books_reviews/_navbar.html' %}
 
   <div class="container">
-    <h1 class="mb-5 text-center">Creation ✍️</h1>
+    <h1 tabindex="0" class="mb-5 text-center">Creation ✍️</h1>
       <div class="row">
         {% include 'books_reviews/_message.html' %}
 
@@ -21,7 +22,7 @@
             </button>
           </p>
           <div id="flush-collapseOne" class="accordion-collapse p-5 collapse" data-bs-parent="#accordionFlushExample">
-            <h2 class="mb-3 text-center">Book</h2>
+            <h2 tabindex="0" class="mb-3 text-center">Book</h2>
               {% include 'books_reviews/_form_book.html' %}
           </div>
         </div>
@@ -33,7 +34,7 @@
             </button>
           </p>
           <div id="flush-collapseTwo" class="accordion-collapse p-5 {% if not request.GET.action == 'create_review' %}collapse{% endif %}" data-bs-parent="#accordionFlushExample">
-            <h2 class="mb-3 text-center">Review</h2>
+            <h2 tabindex="0" class="mb-3 text-center">Review</h2>
             {% include 'books_reviews/_form_review.html' %}
           </div>
         </div>
@@ -44,7 +45,7 @@
             </button>
           </p>
           <div id="flush-collapseThree" class="accordion-collapse p-5 {% if not request.GET.action == 'create_ticket' %}collapse{% endif %}" data-bs-parent="#accordionFlushExample">
-            <h2 class="mb-3 text-center">Ticket</h2>
+            <h2 tabindex="0" class="mb-3 text-center">Ticket</h2>
             {% include 'books_reviews/_form_ticket.html' %}
           </div>
         </div>

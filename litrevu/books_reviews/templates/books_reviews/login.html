@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% load static %}
 
 <html lang="en" data-bs-theme="dark">
@@ -8,11 +9,11 @@
 <body>
 
   <div class="container">
-    <h1 class="m-5 text-center">Login</h1>
+    <h1 tabindex="0" class="m-5 text-center">Login</h1>
 
     <div class="row">
       <div class="col-6 text-center">
-        <h2 class="fs-3 m-5">➕ Profile creation</h2>
+        <h2 tabindex="0" class="fs-3 m-5">➕ Profile creation</h2>
         <div class="accordion accordion-flush " id="accordionFlushExample">
           <div class="accordion-item">
             <p class="accordion-header">
@@ -28,7 +29,7 @@
       </div>
 
       <div class="col-6 text-center">
-        <h2 class="fs-3 m-5">🔑 Sign in</h2>
+        <h2 tabindex="0" class="fs-3 m-5">🔑 Sign in</h2>
         {% include 'books_reviews/_form_authenticate.html' %}
       </div>
 

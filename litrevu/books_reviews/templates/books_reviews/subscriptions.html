@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% load static %}
 
 <html lang="en" data-bs-theme="dark">
@@ -10,9 +11,9 @@
 
     <div class="container">
         {% include 'books_reviews/_message.html' %}
-        <h1 class="mb-5 text-center">Subscriptions : {{ username }}</h1>
+        <h1 tabindex="0" class="mb-5 text-center">Subscriptions : {{ username }}</h1>
 
-        <h2 class="mb-5 fs-3">Looking for someone</h2>
+        <h2 tabindex="0" class="mb-5 fs-3">Looking for someone</h2>
             <form action="" method="post" class="pe-3 row mb-5">
                 {% csrf_token %}
                 <div class="form-floating col-10">
@@ -26,7 +27,7 @@
                 <button type="submit" name="form_submit" value="follow" class="btn btn-sm btn-outline-secondary m-0 col-2">✅ follow</button>
             </form>
 
-        <h2 class="mb-5 fs-3">My followers</h2>
+        <h2 tabindex="0" class="mb-5 fs-3">My followers</h2>
         <table class="table mb-5">
             <thead class="table-dark">
                 <th scope="col">#</th>
@@ -35,14 +36,14 @@
             <tbody>
                 {% for index, follower in followed_by %}
                 <tr>
-                    <th scope="row" class="fst-italic">{{ index }}</th>
-                    <td scope="row" class="fst-italic">{{ follower }}</td>
+                    <th tabindex="0" scope="row" class="fst-italic">{{ index }}</th>
+                    <td tabindex="0" scope="row" class="fst-italic">{{ follower }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <h2 class="mb-5 fs-3">My subscriptions</h2>
+        <h2 tabindex="0" class="mb-5 fs-3">My subscriptions</h2>
         <table class="table mb-5">
             <thead class="table-dark">
                 <th scope="col">#</th>
@@ -52,8 +53,8 @@
             <tbody>
                 {% for index, follow in follows %}
                 <tr>
-                    <th scope="row" class="fst-italic">{{ index }}</th>
-                    <td scope="row" class="fst-italic">{{ follow }}</td>
+                    <th tabindex="0" scope="row" class="fst-italic">{{ index }}</th>
+                    <td tabindex="0" scope="row" class="fst-italic">{{ follow }}</td>
                     <td scope="row">
                         <form method="post" action="{% url 'unfollow' follow.id %}" class="m-0 d-flex pe-3">
                             {% csrf_token %}

@@ -4,12 +4,12 @@
 <div class="card mb-5">
     <div class="row">
         <div class="col-md-2">
-            <img src="{{  post.book.picture.url  }}" class="img-fluid rounded-start" alt="couverture de : {{  post.book.title  }}">
+            <img tabindex="0" src="{{  post.book.picture.url  }}" class="img-fluid rounded-start" alt="couverture de : {{  post.book.title  }}">
         </div>
         <div class="col-md-10">
             <div class="card-body">
                 <div class="row align-items-center">
-                    <p class="col-md-8 card-title fs-5 fw-bold fst-italic">{{  post.book.title  }}</p>
+                    <p tabindex="0" class="col-md-8 card-title fs-5 fw-bold fst-italic">{{  post.book.title  }}</p>
                     {% if post.rate %}
                         <p class="col-md-4 text-end">
                             {% for number in rating_loop %}
@@ -25,9 +25,9 @@
                     {% endif %}
                 </div>
                 <hr class="mb-4">
-                <p class="card-text">{{  post.headline  }}</p>
-                <p class="card-text mb-4">{{  post.bodyline  }}</p>
-                <p class="card-text">
+                <p tabindex="0" class="card-text">{{  post.headline  }}</p>
+                <p tabindex="0" class="card-text mb-4">{{  post.bodyline  }}</p>
+                <p tabindex="0" class="card-text">
                     <small class="text-body-secondary">👤 {{  post.author_user   }}</small>
                     <small class="text-body-secondary ms-5">🕙 {{  post.creation_date  }}</small>
                     {% if not post.rate %}
@@ -37,9 +37,9 @@
 
                 {% if post.ticket %}
                     <hr class="mb-4 mt-4">
-                    <p class="card-text">{{  post.ticket.headline  }}</p>
-                    <p class="card-text mb-4">{{  post.ticket.bodyline  }}</p>
-                    <p class="card-text">
+                    <p tabindex="0" class="card-text">{{  post.ticket.headline  }}</p>
+                    <p tabindex="0" class="card-text mb-4">{{  post.ticket.bodyline  }}</p>
+                    <p tabindex="0" class="card-text">
                         <small class="text-body-secondary">👤 {{  post.ticket.author_user   }}</small>
                         <small class="text-body-secondary ms-5">🕙 {{  post.ticket.creation_date  }}</small>
                         {% if post.ticket.answered %}

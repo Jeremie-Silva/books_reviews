@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% load static %}
 
 <html lang="en" data-bs-theme="dark">
@@ -8,7 +9,7 @@
 <body>
     {% include 'books_reviews/_navbar.html' %}
     <div class="container">
-        <h1 class="mb-5 text-center">Edition :
+        <h1 tabindex="0" class="mb-5 text-center">Edition :
             {% if item == 'ticket' %}Ticket{% endif %}
             {% if item == 'review' %}Review{% endif %}
         </h1>

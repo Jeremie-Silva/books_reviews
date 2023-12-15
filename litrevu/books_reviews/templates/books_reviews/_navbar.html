@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-sm bg-body-tertiary mb-5">
+<nav class="navbar navbar-expand-sm bg-body-tertiary mb-5" role="navigation">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
         <img src="{% static 'books_reviews/images/litrevu_logo_icon.png' %}" id="main_logo_one" alt="logo litrevu">
@@ -11,9 +11,9 @@
     </button>
     <div class="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link pe-3 {% if request.path == '/' %}active{% endif %}" href="/">Flux</a>
-        <a class="nav-link pe-3 {% if request.path == '/my_posts/' %}active{% endif %}" href="/my_posts">Posts</a>
-        <a class="nav-link pe-3 {% if request.path == '/subscriptions/' %}active{% endif %}" href="/subscriptions">Subscriptions</a>
+        <a class="nav-link pe-3 {% if request.path == '/' %}active{% endif %}" href="/" {% if request.path == '/' %}aria-current="page"{% endif %}>Flux</a>
+        <a class="nav-link pe-3 {% if request.path == '/my_posts/' %}active{% endif %}" href="/my_posts"  {% if request.path == '/my_posts/' %}aria-current="page"{% endif %}>Posts</a>
+        <a class="nav-link pe-3 {% if request.path == '/subscriptions/' %}active{% endif %}" href="/subscriptions" {% if request.path == '/subscriptions/' %}aria-current="page"{% endif %}>Subscriptions</a>
         <form method="post" action="{% url 'logout' %}" class="m-0 d-flex pe-3">
           {% csrf_token %}
           <button type="submit" class="nav-link form-control form-control-sm">Logout</button>
