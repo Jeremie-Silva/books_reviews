@@ -23,11 +23,24 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='review',
             name='ticket',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='review', to='books_reviews.ticket'),
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='review',
+                to='books_reviews.ticket'
+            ),
         ),
         migrations.AlterField(
             model_name='book',
             name='picture',
-            field=models.ImageField(upload_to='books_reviews/static/books_reviews/uploads/%Y/%m/%d/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['png', 'jpeg', 'jpg'])]),
+            field=models.ImageField(
+                upload_to='books_reviews/static/books_reviews/uploads/%Y/%m/%d/',
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        allowed_extensions=['png', 'jpeg', 'jpg']
+                    )
+                ]
+            ),
         ),
     ]

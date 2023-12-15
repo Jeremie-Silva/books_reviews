@@ -15,4 +15,3 @@ urlpatterns = [
     path("edit/<str:item>/<int:id>/", edition, name="edition"),
     path("delete/<str:item>/<int:id>/", deletion, name="deletion"),
 ]
-

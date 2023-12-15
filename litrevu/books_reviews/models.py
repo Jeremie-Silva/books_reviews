@@ -61,7 +61,9 @@ class Book(models.Model):
 
 class Ticket(models.Model):
     book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="tickets")
-    author_user = models.ForeignKey(to=UserProfile, on_delete=models.PROTECT, related_name="tickets")
+    author_user = models.ForeignKey(
+        to=UserProfile, on_delete=models.PROTECT, related_name="tickets"
+    )
     headline = models.CharField(max_length=150)
     bodyline = models.CharField(max_length=3000, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
@@ -76,7 +78,9 @@ class Ticket(models.Model):
 
 class Review(models.Model):
     book = models.ForeignKey(to=Book, on_delete=models.CASCADE, related_name="reviews")
-    author_user = models.ForeignKey(to=UserProfile, on_delete=models.PROTECT, related_name="reviews")
+    author_user = models.ForeignKey(
+        to=UserProfile, on_delete=models.PROTECT, related_name="reviews"
+    )
     ticket = models.OneToOneField(
         to=Ticket, on_delete=models.PROTECT, related_name="review", null=True, blank=True
     )

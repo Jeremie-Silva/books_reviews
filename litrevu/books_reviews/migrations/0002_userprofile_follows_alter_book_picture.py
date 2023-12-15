@@ -14,11 +14,20 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='userprofile',
             name='follows',
-            field=models.ManyToManyField(related_name='followed_by', to='books_reviews.userprofile'),
+            field=models.ManyToManyField(
+                related_name='followed_by', to='books_reviews.userprofile'
+            ),
         ),
         migrations.AlterField(
             model_name='book',
             name='picture',
-            field=models.ImageField(upload_to='books_reviews/uploads/%Y/%m/%d/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['png', 'jpeg', 'jpg'])]),
+            field=models.ImageField(
+                upload_to='books_reviews/uploads/%Y/%m/%d/',
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        allowed_extensions=['png', 'jpeg', 'jpg']
+                    )
+                ]
+            ),
         ),
     ]

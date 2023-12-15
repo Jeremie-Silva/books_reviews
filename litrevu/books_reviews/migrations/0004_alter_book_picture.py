@@ -14,6 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='picture',
-            field=models.ImageField(upload_to='books_reviews/uploads/%Y/%m/%d/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['png', 'jpeg', 'jpg'])]),
+            field=models.ImageField(
+                upload_to='books_reviews/uploads/%Y/%m/%d/',
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        allowed_extensions=['png', 'jpeg', 'jpg']
+                    )
+                ]
+            ),
         ),
     ]

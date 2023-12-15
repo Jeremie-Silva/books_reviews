@@ -1,7 +1,8 @@
-from django.forms import ModelForm, Textarea, Select, RadioSelect, FileInput, PasswordInput, TextInput
+from django.forms import ModelForm, Textarea, Select, RadioSelect, FileInput, PasswordInput, \
+    TextInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Review, Book, Ticket, UserProfile
+from .models import Review, Book, Ticket
 
 
 class ReviewForm(ModelForm):

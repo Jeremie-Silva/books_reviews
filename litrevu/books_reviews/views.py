@@ -71,7 +71,7 @@ def subscriptions(request, user_id=None):
 @login_required(login_url="user_login")
 def my_posts(request):
     user: UserProfile = UserProfile.objects.get(user__username=request.user)
-    personal_posts: list = list(user.tickets.filter(review__isnull=True)) + list(user.reviews.all())
+    personal_posts = list(user.tickets.filter(review__isnull=True)) + list(user.reviews.all())
     personal_posts += list(Review.objects.filter(
         ticket__isnull=False, ticket__author_user=user
     ).exclude(author_user=user))
@@ -113,7 +113,9 @@ def creation(request):
                 return render(request, template_name="books_reviews/creation.html", context=data)
     if request.GET.get("id"):
         ticket_related: Ticket = Ticket.objects.get(pk=request.GET.get("id"))
-        data["form_review"] = ReviewForm(instance=Review(book=ticket_related.book, ticket=ticket_related))
+        data["form_review"] = ReviewForm(instance=Review(
+            book=ticket_related.book, ticket=ticket_related
+        ))
         render(request, template_name="books_reviews/creation.html", context=data)
     return render(request, template_name="books_reviews/creation.html", context=data)
 
@@ -134,9 +136,17 @@ def edition(request, item, id):
                 messages.success(request=request, message="Your changes were saved successfully.")
                 return redirect("my_posts")
     if item == "ticket":
-        data: dict = {"form_ticket": TicketForm(instance=Ticket.objects.get(pk=id)), "item": "ticket"}
+        data: dict = {
+            "form_ticket": TicketForm(instance=Ticket.objects.get(pk=id)), "item": "ticket"
+        }
     elif item == "review":
-        data: dict = {"form_review": ReviewForm(instance=Review.objects.get(pk=id)), "item": "review"}
+        if request.user == Review.objects.get(pk=id).author_user.user:
+            data: dict = {
+                "form_review": ReviewForm(instance=Review.objects.get(pk=id)), "item": "review"
+            }
+        else:
+            messages.error(request=request, message="This item is protected.")
+            return redirect("my_posts")
     else:
         data: dict = {}
     return render(request, template_name="books_reviews/edition.html", context=data)
@@ -149,8 +159,10 @@ def deletion(request, item, id):
             if request.user == Ticket.objects.get(pk=id).author_user.user:
                 try:
                     Ticket.objects.get(pk=id).delete()
-                    messages.success(request=request, message="Your changes were saved successfully.")
-                except:
+                    messages.success(
+                        request=request, message="Your changes were saved successfully."
+                    )
+                except ValueError:
                     messages.error(request=request, message="This item is protected.")
             else:
                 messages.error(request=request, message="This item is protected.")
@@ -158,8 +170,10 @@ def deletion(request, item, id):
             if request.user == Review.objects.get(pk=id).author_user.user:
                 try:
                     Review.objects.get(pk=id).delete()
-                    messages.success(request=request, message="Your changes were saved successfully.")
-                except:
+                    messages.success(
+                        request=request, message="Your changes were saved successfully."
+                    )
+                except ValueError:
                     messages.error(request=request, message="This item is protected.")
             else:
                 messages.error(request=request, message="This item is protected.")
