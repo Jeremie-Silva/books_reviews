@@ -1,25 +1,10 @@
-creer le formulaire de connexion
-déconnexion
-
-
-
-
-pour l'édition : page d'édition
-programmer le bouton des posts
-
-follow obligatoire ? à la creation d'un utilisateur ?
-
-bouton formulaire de désabonnement
-
-
-
-
-renommer images à la volée
-admin : global rate au bon format
-admin : formattage des booléens pour le False
-admin : rate sous une autre forme
-admin : agrandir le champ bodyline
+Vérification accéssibilité avec LIGHTHOUSE + plugin screen reader
+accessibilité référentiel WCAG : Les images ont toutes un titre et un texte alternatif
 régénerer migration
+PEP8 codingstyle
+Virer le fichier todo
 
-accessibilité
-PEP8
+
+accéssibilité :
+- balises alt
+- balises ARIA ?
